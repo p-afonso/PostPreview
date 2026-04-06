@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { randomUUID } from 'crypto'
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -25,13 +26,13 @@ function mapRow(row: any) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const id = body.id || Date.now().toString()
+    const id = body.id || randomUUID()
 
     const { error } = await supabase.from('preview_posts').upsert({
       id,
       linkedin_text: body.linkedinText || '',
       article_title: body.articleTitle || '',
-      article_link: body.articleLink || '',
+      article_link: body.article_link || '',
       og_image: body.ogImage || null,
       slides: body.slides || [],
       slides_html: body.slidesHtml || [],
