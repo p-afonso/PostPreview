@@ -76,7 +76,7 @@ export default function Dashboard() {
   const openPost = (post: Post) => {
     setSelected(post)
     setActiveSlide(0)
-    const hasSlides = (post.slides?.length > 0) || (post.slidesHtml?.length > 0)
+    const hasSlides = (post.slides?.length ?? 0) > 0 || (post.slidesHtml?.length ?? 0) > 0
     setView(hasSlides ? 'instagram' : 'linkedin')
   }
 
@@ -226,7 +226,7 @@ export default function Dashboard() {
               >
                 LinkedIn
               </button>
-              {((selected.slides?.length > 0) || (selected.slidesHtml?.length > 0)) && (
+              {((selected.slides?.length ?? 0) > 0 || (selected.slidesHtml?.length ?? 0) > 0) && (
                 <button
                   style={{ ...styles.viewBtn, ...(view === 'instagram' ? styles.viewBtnActive : {}) }}
                   onClick={() => setView('instagram')}
@@ -257,7 +257,7 @@ export default function Dashboard() {
             )}
 
             {/* Instagram carousel preview */}
-            {view === 'instagram' && ((selected.slides?.length > 0) || (selected.slidesHtml?.length > 0)) && (
+            {view === 'instagram' && ((selected.slides?.length ?? 0) > 0 || (selected.slidesHtml?.length ?? 0) > 0) && (
               <div style={styles.instagramPreview}>
                 <div style={styles.carouselWrap}>
                   {selected.slidesHtml && selected.slidesHtml[activeSlide] ? (
