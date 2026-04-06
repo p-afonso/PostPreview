@@ -210,7 +210,10 @@ export default function PreviewPage() {
                     />
                   ) : hasSlides && (
                     <img
-                      src={post.slides![activeSlide]}
+                      src={typeof post.slides![activeSlide] === 'string' 
+                        ? (post.slides![activeSlide] as unknown as string)
+                        : (post.slides![activeSlide] as any).imageUrl
+                      }
                       alt={`Slide ${activeSlide + 1}`}
                       className={styles.slideImg}
                     />

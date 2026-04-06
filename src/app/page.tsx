@@ -144,7 +144,14 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: () => void }) {
         </div>
       ) : post.slides?.[0] ? (
         <div className={styles.cardThumb}>
-          <img src={post.slides[0]} alt="" className={styles.thumbImg} />
+          <img 
+            src={typeof post.slides[0] === 'string' 
+              ? (post.slides[0] as unknown as string) 
+              : (post.slides[0] as any).imageUrl
+            } 
+            alt="" 
+            className={styles.thumbImg} 
+          />
           <div className={styles.thumbOverlay} />
         </div>
       ) : post.slidesHtml?.[0] ? (
